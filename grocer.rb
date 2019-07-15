@@ -3,6 +3,7 @@ def consolidate_cart(cart)
   new_cart = {}
 	cart.each do |hash|
 		hash.each do |item, attributes|
+<<<<<<< HEAD
 
 			if new_cart[item]
 				new_cart[item][:count] += 1
@@ -11,6 +12,35 @@ def consolidate_cart(cart)
 				new_cart[item][:count] = 1
 			end
 		end
+=======
+
+			if new_cart[item]
+				new_cart[item][:count] += 1
+			else
+				new_cart[item] = attributes
+				new_cart[item][:count] = 1
+			end
+		end
+end
+new_cart
+ end
+
+
+def apply_coupons(cart, coupons)
+  coupons.each do |coupon|
+    item_name = coupon[:item]
+
+    if cart.has_key?(item_name)
+      cart[item_name + " W/COUPON"] = {
+        :price => (coupon[:cost]/coupon[:num]),
+        :clearance => cart[item_name][:clearance],
+        :count => coupon[:num]
+      }
+      cart[item_name][:count] -= coupon[:num]
+    end
+  end
+  cart
+>>>>>>> 65bad95897fe5c13524d1b67195c3f2498c27de8
 end
 new_cart
  end
